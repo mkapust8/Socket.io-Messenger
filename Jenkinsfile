@@ -23,8 +23,11 @@ pipeline {
     post{
     	success {
     		echo 'Sucess....'
+    		emailext body: 'Test Message',
+    			subject: 'Test Subject',
+    			to: 'marcin.kapusta2986@gmail.com'
     	}
-    	failure{
+    	unstable{
     		echo 'Sucess....'
     	}
     }
