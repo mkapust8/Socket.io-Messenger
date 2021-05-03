@@ -27,7 +27,7 @@ pipeline {
     		attachmentsPattern: 'logs.txt'
                 body: "test",
                 subject: "test",
-                to: 'marcin.kapusta@gazeta.pl'
+                to: 'marcin.kapusta2986@gmailcom'
     	}
     	unstable{
     		echo 'Sucess....'
