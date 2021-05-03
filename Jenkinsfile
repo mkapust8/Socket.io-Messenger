@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'npm test > logs.txt'
+                sh 'npm test > log.txt'
             }
         }
         stage('Deploy') {
@@ -24,13 +24,18 @@ pipeline {
     	success {
     		echo 'Sucess....'
     		emailext attachLog: true,
-    		attachmentsPattern: 'logs.txt',
-                body: "test",
-                subject: "test",
+    		attachmentsPattern: 'log.txt',
+                body: "test successful",
+                subject: "test successful",
                 to: 'marcin.kapusta2986@gmail.com'
     	}
     	unstable{
-    		echo 'Sucess....'
+    		echo 'Unstable....'
+    		emailext attachLog: true,
+    		attachmentsPattern: 'log.txt',
+                body: "tests failed",
+                subject: "tests failed",
+                to: 'marcin.kapusta2986@gmail.com'
     	}
     }
 }
