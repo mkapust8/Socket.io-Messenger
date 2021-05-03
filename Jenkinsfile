@@ -20,4 +20,12 @@ pipeline {
             }
         }
     }
+    post{
+    	success {
+    		echo 'Sucess....'
+    	}
+    	failure{
+    		echo 'Sucess....'
+    	}
+    }
 }
