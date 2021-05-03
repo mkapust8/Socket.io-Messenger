@@ -24,7 +24,7 @@ pipeline {
     	success {
     		echo 'Sucess....'
     		emailext attachLog: true,
-    		attachmentsPattern: 'logs.txt'
+    		attachmentsPattern: 'logs.txt',
                 body: "test",
                 subject: "test",
                 to: 'marcin.kapusta2986@gmailcom'
