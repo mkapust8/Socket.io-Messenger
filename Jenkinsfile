@@ -1,8 +1,10 @@
 pipeline {
     agent any
-
+    environment{
+    	build_success = true
+    }	
     stages {
-    	boolean build_success = true
+    	
         stage('Build') {
             steps {
             	script{
