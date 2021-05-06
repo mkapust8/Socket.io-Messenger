@@ -8,7 +8,7 @@ pipeline {
                 	sh 'git checkout master'
                 	sh 'git pull'
                 	sh 'npm install'
-                catch (Exception e){
+                }catch (Exception e){
                 	build_success=false
                 }
           
