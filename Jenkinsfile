@@ -41,21 +41,25 @@ pipeline {
         }
     }
     post{
-    	success {
-    		echo 'Sucess....'
-    		emailext attachLog: true,
-    		attachmentsPattern: 'tests_log.txt',
-                body: "Tests successful for job ${env.JOB_NAME}",
-                subject: "Tests successful.",
-                to: 'marcin.kapusta2986@gmail.com'
+    	if(build_success){
+    		if(build_success){	
+	    		echo 'Sucess....'
+	    		emailext attachLog: true,
+	    		attachmentsPattern: 'tests_log.txt',
+		        body: "Tests successful for job ${env.JOB_NAME}",
+		        subject: "Tests successful.",
+		        to: 'marcin.kapusta2986@gmail.com'
+		}
+		else{
+	    		echo 'Unstable....'
+	    		emailext attachLog: true,
+	    		attachmentsPattern: 'tests_log.txt',
+		        body: "Tests failed for job ${env.JOB_NAME}",
+		        subject: "Tests failed.",
+		        to: 'marcin.kapusta2986@gmail.com'
+                }
     	}
-    	unstable{
-    		echo 'Unstable....'
-    		emailext attachLog: true,
-    		attachmentsPattern: 'tests_log.txt',
-                body: "Tests failed for job ${env.JOB_NAME}",
-                subject: "Tests failed.",
-                to: 'marcin.kapusta2986@gmail.com'
-    	}
+    	
+    	
     }
 }
