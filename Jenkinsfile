@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment{
     	build_success = true
-    	test success = true
+    	test_success = true
     }	
     stages {
     	
