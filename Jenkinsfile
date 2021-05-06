@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment{
     	build_success = true
+    	test success = true
     }	
     stages {
     	
@@ -23,8 +24,12 @@ pipeline {
                 script{
                 	if(build_success)
                 	{
-                		echo 'Testing..'
-                		sh 'npm test > tests_log.txt'	
+                		try{
+                			echo 'Testing..'
+                			sh 'npm test > tests_log.txt'	
+                		}catch (Exception e){
+                			test_success=false
+                		}
                 	}
             	}
             }
