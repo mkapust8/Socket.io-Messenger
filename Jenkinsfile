@@ -4,14 +4,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                try{
-                	sh 'git checkout master'
-                	sh 'git pull'
-                	sh 'npm install'
-                }catch (Exception e){
-                	build_success=false
-                }
-          
+            	script{
+                	try{
+                		sh 'git checkout master'
+                		sh 'git pull'
+                		sh 'npm install'
+                	}catch (Exception e){
+                		build_success=false
+                	}
+		}
             }
         }
         stage('Test') {
