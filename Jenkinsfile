@@ -17,11 +17,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                if(build_success)
-                {
-                	echo 'Testing..'
-                	sh 'npm test > tests_log.txt'	
-                }
+                script{
+                	if(build_success)
+                	{
+                		echo 'Testing..'
+                		sh 'npm test > tests_log.txt'	
+                	}
+            	}
             }
         }
         stage('Deploy') {
