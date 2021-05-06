@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+    	boolean build_success = true
         stage('Build') {
             steps {
             	script{
