@@ -4,16 +4,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'git checkout master'
-                sh 'git pull'
-                sh 'npm install'
+                try{
+                	sh 'git checkout master'
+                	sh 'git pull'
+                	sh 'npm install'
+                catch (Exception e){
+                	build_success=false
+                }
           
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
-                sh 'npm test > tests_log.txt'
+                if(build_success)
+                {
+                	echo 'Testing..'
+                	sh 'npm test > tests_log.txt'	
+                }
             }
         }
         stage('Deploy') {
