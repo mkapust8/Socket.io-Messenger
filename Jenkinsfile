@@ -13,10 +13,11 @@ pipeline {
           
             }
             post {
+            	script{
             	
-            	
-            	failure{
-            		build_success = false
+		    	failure{
+		    		build_success = false
+		    	}
             	}
             
             }
