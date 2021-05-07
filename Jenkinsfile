@@ -16,7 +16,19 @@ pipeline {
             	failure{
             		script{
             			build_success = false
+            			echo 'Build failed....'
+			    	emailext attachLog: true,
+				body: "Build failed for job ${env.JOB_NAME}",
+				subject: "Build failed.",
+				to: 'marcin.kapusta2986@gmail.com'
             		}
+            	}
+            	success{
+            		echo 'Build success....'
+			emailext attachLog: true,
+			body: "Builds succeeded for job ${env.JOB_NAME}",
+			subject: "Build sucess.",
+			to: 'marcin.kapusta2986@gmail.com'
             	}
             
             }
@@ -70,14 +82,7 @@ pipeline {
 					to: 'marcin.kapusta2986@gmail.com'
 				}
 			}
-			else
-			{
-				echo 'Build failed....'
-			    	emailext attachLog: true,
-				body: "Tests failed for job ${env.JOB_NAME}",
-				subject: "Build failed.",
-				to: 'marcin.kapusta2986@gmail.com'
-			}
+			
 			
 	    	}
 	    }
