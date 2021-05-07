@@ -38,7 +38,6 @@ pipeline {
             	
             	failure{
             		script{
-            	
             			test_success = false
             		}
             	}
