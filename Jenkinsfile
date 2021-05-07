@@ -9,7 +9,7 @@ pipeline {
             steps {
                 sh 'git checkout master'
                 sh 'git pull'
-                sh 'nnpm install'
+                sh 'npm install'
           
             }
             post {
@@ -34,6 +34,17 @@ pipeline {
 			}
                 }
             }
+            post {
+            	
+            	failure{
+            		script{
+            	
+            			test_success = false
+            		}
+            	}
+            
+            }
+            
         }
         stage('Deploy') {
             steps {
