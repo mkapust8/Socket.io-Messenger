@@ -9,7 +9,7 @@ pipeline {
             steps {
                 sh 'git checkout master'
                 sh 'git pull'
-                sh 'npm install'
+                sh 'npm install > build_log.txt'
           
             }
             post {
@@ -53,21 +53,36 @@ pipeline {
         }
     }
     post{
-    	success {
-    		echo 'Sucess....'
-    		emailext attachLog: true,
-    		attachmentsPattern: 'tests_log.txt',
-                body: "Tests successful for job ${env.JOB_NAME}",
-                subject: "Tests successful.",
-                to: 'marcin.kapusta2986@gmail.com'
-    	}
-    	unstable{
-    		echo 'Unstable....'
-    		emailext attachLog: true,
-    		attachmentsPattern: 'tests_log.txt',
-                body: "Tests failed for job ${env.JOB_NAME}",
-                subject: "Tests failed.",
-                to: 'marcin.kapusta2986@gmail.com'
+    	script{
+    		if(build_success){
+    			if(test_success){
+		    		echo 'Sucess....'
+		    		emailext attachLog: true,
+		    		attachmentsPattern: 'tests_log.txt',
+				body: "Tests successful for job ${env.JOB_NAME}",
+				subject: "Tests successful.",
+				to: 'marcin.kapusta2986@gmail.com'
+			}
+			else{
+    	
+		    		echo 'Unstable....'
+		    		emailext attachLog: true,
+		    		attachmentsPattern: 'tests_log.txt',
+				body: "Tests failed for job ${env.JOB_NAME}",
+				subject: "Tests failed.",
+				to: 'marcin.kapusta2986@gmail.com'
+			}
+		}
+		else
+		{
+			echo 'Build failed....'
+		    	emailext attachLog: true,
+		    	attachmentsPattern: 'build_log.txt',
+			body: "Tests failed for job ${env.JOB_NAME}",
+			subject: "Tests failed.",
+			to: 'marcin.kapusta2986@gmail.com'
+		}
+		
     	}
     }
 }
