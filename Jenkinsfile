@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment{
     	build_success = true
-    	test_success = true
     }
     stages {
         stage('Build') {
@@ -16,6 +15,7 @@ pipeline {
             	failure{
             		script{
             			build_success = false
+            			
             			echo 'Build failed....'
 			    	emailext attachLog: true,
 				body: "Build failed for job ${env.JOB_NAME}",
@@ -24,7 +24,7 @@ pipeline {
             		}
             	}
             	success{
-            		echo 'Build success....'
+            		echo 'Build successful....'
 			emailext attachLog: true,
 			body: "Builds succeeded for job ${env.JOB_NAME}",
 			subject: "Build sucess.",
@@ -45,10 +45,21 @@ pipeline {
             }
             post {
             	
+            	success{
+            		echo 'Sucess....'
+			emailext attachLog: true,
+			attachmentsPattern: 'tests_log.txt',
+			body: "Tests successful for job ${env.JOB_NAME}",
+			subject: "Tests successful.",
+			to: 'marcin.kapusta2986@gmail.com'
+            	}
             	failure{
-            		script{
-            			test_success = false
-            		}
+            		echo 'Unstable....'
+			emailext attachLog: true,
+			attachmentsPattern: 'tests_log.txt',
+			body: "Tests failed for job ${env.JOB_NAME}",
+			subject: "Tests failed.",
+			to: 'marcin.kapusta2986@gmail.com'
             	}
             
             }
@@ -61,30 +72,6 @@ pipeline {
         }
     }
     post{
-    	always{
-	    	script{
-	    		if(build_success){
-	    			if(test_success){
-			    		echo 'Sucess....'
-			    		emailext attachLog: true,
-			    		attachmentsPattern: 'tests_log.txt',
-					body: "Tests successful for job ${env.JOB_NAME}",
-					subject: "Tests successful.",
-					to: 'marcin.kapusta2986@gmail.com'
-				}
-				else{
-	    	
-			    		echo 'Unstable....'
-			    		emailext attachLog: true,
-			    		attachmentsPattern: 'tests_log.txt',
-					body: "Tests failed for job ${env.JOB_NAME}",
-					subject: "Tests failed.",
-					to: 'marcin.kapusta2986@gmail.com'
-				}
-			}
-			
-			
-	    	}
-	    }
+    	
     }
 }
