@@ -10,7 +10,7 @@ describe('Server', function (){
   it('Should succesfully get the home page', function (){
     chai.request(url).get('/')
     .then(function (res) {
-      expect(res).to.have.status(200);
+      expect(res).to.have.status(404);
     }, function (err) {
       throw err;
     });
