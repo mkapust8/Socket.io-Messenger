@@ -80,7 +80,7 @@ pipeline {
 				echo 'Build failed....'
 			    	emailext attachLog: true,
 				body: "Tests failed for job ${env.JOB_NAME}",
-				subject: "Tests failed.",
+				subject: "Build failed.",
 				to: 'marcin.kapusta2986@gmail.com'
 			}
 			
