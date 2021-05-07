@@ -6,23 +6,23 @@ pipeline {
     }
     stages {
         stage('Build') {
-            script{
+            steps {
+                sh 'git checkout master'
+                sh 'git pull'
+                sh 'npm install'
+          
+            }
+            post {
             	
-		    steps {
-		        sh 'git checkout master'
-		        sh 'git pull'
-		        sh 'npm install'
-		  
-		    }
-		    post {
-		    	
-		    	failure{
-		    		build_success = false
-		    	
-		    	}
-		    
-		    }
-		}
+            	failure{
+            		script{
+            	
+            			build_success = false
+            		}
+            	}
+            
+            }
+        
         }
         stage('Test') {
             steps {
