@@ -9,7 +9,7 @@ pipeline {
             steps {
                 sh 'git checkout master'
                 sh 'git pull'
-                sh 'npm install > build_log.txt'
+                sh 'npm install'
           
             }
             post {
@@ -78,7 +78,6 @@ pipeline {
 			{
 				echo 'Build failed....'
 			    	emailext attachLog: true,
-			    	attachmentsPattern: 'build_log.txt',
 				body: "Tests failed for job ${env.JOB_NAME}",
 				subject: "Tests failed.",
 				to: 'marcin.kapusta2986@gmail.com'
