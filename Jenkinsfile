@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    environment{
+    	build_success = true
+    	test_success = true
+    }
     stages {
         stage('Build') {
             steps {
@@ -9,11 +12,25 @@ pipeline {
                 sh 'npm install'
           
             }
+            post {
+            	
+            	
+            	failure{
+            		build_success = false
+            	}
+            
+            }
+        
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
-                sh 'npm test > tests_log.txt'
+            	script{
+            		if(build_success)
+            		{
+				echo 'Testing..'
+				sh 'npm test > tests_log.txt'
+			}
+                }
             }
         }
         stage('Deploy') {
