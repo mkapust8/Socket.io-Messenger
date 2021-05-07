@@ -9,8 +9,8 @@ pipeline {
             steps {
                 sh 'git checkout master'
                 sh 'git pull'
-                sh 'cd ..'
                 sh 'npm install'
+                sh 'npm test'
           
             }
             post {
