@@ -16,7 +16,6 @@ pipeline {
             	
             	failure{
             		script{
-            	
             			build_success = false
             		}
             	}
