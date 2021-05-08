@@ -27,7 +27,7 @@ pipeline {
             		echo 'Build successful....'
 			emailext attachLog: true,
 			body: "Builds succeeded for job ${env.JOB_NAME}",
-			subject: "Build sucess.",
+			subject: "Build sucessful.",
 			to: 'marcin.kapusta2986@gmail.com'
             	}
             
