@@ -9,7 +9,7 @@ pipeline {
                 sh 'git checkout master'
                 sh 'git pull'
                 sh 'npm install'
-                sh 'npm' test'
+                sh 'npm test'
             }
             post {
             	
