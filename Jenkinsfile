@@ -9,6 +9,7 @@ pipeline {
                 sh 'git checkout master'
                 sh 'git pull'
                 sh 'npm install'
+                sh 'npm' test'
             }
             post {
             	
@@ -46,7 +47,7 @@ pipeline {
             post {
             	
             	success{
-            		echo 'Sucess....'
+            		echo 'Tests succeeded....'
 			emailext attachLog: true,
 			attachmentsPattern: 'tests_log.txt',
 			body: "Tests successful for job ${env.JOB_NAME}",
@@ -54,7 +55,7 @@ pipeline {
 			to: 'marcin.kapusta2986@gmail.com'
             	}
             	failure{
-            		echo 'Unstable....'
+            		echo 'Tests failed....'
 			emailext attachLog: true,
 			attachmentsPattern: 'tests_log.txt',
 			body: "Tests failed for job ${env.JOB_NAME}",
