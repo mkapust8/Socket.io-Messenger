@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment{
     	build_success = true
+	    
     }
     stages {
         stage('Build') {
