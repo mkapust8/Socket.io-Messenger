@@ -11,7 +11,7 @@ pipeline {
                 sh 'git checkout master'
                 sh 'git pull'
                 
-                sh 'docker build -t messenger build'
+                sh 'npm install'
                 
             }
             post {
@@ -44,7 +44,7 @@ pipeline {
             		{
 				echo 'Testing..'
 				
-				sh 'docker build -t tester test'
+				sh 'npm test > tests_log.txt'
 			}
                 }
             }
@@ -53,6 +53,7 @@ pipeline {
             	success{
             		echo 'Tests succeeded....'
 			emailext attachLog: true,
+			attachmentsPattern: 'tests_log.txt',
 			body: "Tests successful for job ${env.JOB_NAME}",
 			subject: "Tests successful.",
 			to: 'marcin.kapusta2986@gmail.com'
@@ -60,6 +61,7 @@ pipeline {
             	failure{
             		echo 'Tests failed....'
 			emailext attachLog: true,
+			attachmentsPattern: 'tests_log.txt',
 			body: "Tests failed for job ${env.JOB_NAME}",
 			subject: "Tests failed.",
 			to: 'marcin.kapusta2986@gmail.com'
