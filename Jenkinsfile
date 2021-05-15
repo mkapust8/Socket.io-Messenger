@@ -72,7 +72,7 @@ pipeline {
             steps {
             	script{
             	
-		        sh 'docker build -t mkapust9/jenkins_deploy -f Deploy'
+		        sh 'docker build -t mkapust9/jenkins_deploy -f Deploy .'
 		        docker.withRegistry('',credentials)
 		        {
 		        
