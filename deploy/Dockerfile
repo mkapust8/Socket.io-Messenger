@@ -9,9 +9,9 @@ RUN apk add npm
 COPY . home/chat
 WORKDIR home/chat
 
-RUN npm install --prefix ./Socket.io-Messenger
-RUN npm audit fix --prefix ./Socket.io-Messenger
-RUN npm install --prefix ./Socket.io-Messenger
+RUN npm install 
+RUN npm audit fix 
+RUN npm install 
 
 
 
