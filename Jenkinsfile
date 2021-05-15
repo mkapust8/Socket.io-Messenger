@@ -43,6 +43,7 @@ pipeline {
             		{
 				echo 'Testing..'
 				sh 'npm test > tests_log.txt'
+				sh 'docker build -t tester test'
 			}
                 }
             }
