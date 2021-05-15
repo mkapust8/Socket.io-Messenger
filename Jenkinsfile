@@ -70,11 +70,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'docker tag messenger mkapust9/jenkins_deploy'
-                docker.withRegistry('',credentials)
-                {
-                
-                	sh 'docker push mkapust9/jenkins_deploy'
+            	script{
+            	
+		        sh 'docker tag messenger mkapust9/jenkins_deploy'
+		        docker.withRegistry('',credentials)
+		        {
+		        
+		        	sh 'docker push mkapust9/jenkins_deploy'
+		        }
                 }
                 
             }
