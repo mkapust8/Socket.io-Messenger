@@ -72,7 +72,7 @@ pipeline {
             steps {
             	script{
             	
-		        sh 'docker tag messenger mkapust9/jenkins_deploy'
+		        sh 'docker build -t mkapust9/jenkins_deploy deploy'
 		        docker.withRegistry('',credentials)
 		        {
 		        
