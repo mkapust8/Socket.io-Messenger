@@ -3,6 +3,7 @@ pipeline {
     environment{
     	build_success = true
     	
+    	
     }
     stages {
         stage('Build') {
