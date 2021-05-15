@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment{
     	build_success = true
+    	credentials = 'dockerhub_id'
     	
     }
     stages {
@@ -69,10 +70,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                
-                
                 sh 'docker tag messenger mkapust9/jenkins_deploy'
-                sh 'docker push mkapust9/jenkins_deploy'
+                docker.withRegistry('',credentials)
+                {
+                
+                	sh 'docker push mkapust9/jenkins_deploy'
+                }
                 
             }
             post {
