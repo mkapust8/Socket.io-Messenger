@@ -9,7 +9,7 @@ pipeline {
             steps {
                 sh 'git checkout master'
                 sh 'git pull'
-                sh 'npm install'
+                
                 sh 'docker build -t messenger build'
                 
             }
@@ -42,8 +42,8 @@ pipeline {
             		if(build_success)
             		{
 				echo 'Testing..'
-				sh 'npm test > tests_log.txt'
-				sh 'docker build -t tester test'
+				
+				sh 'docker build -t tester test > tests_log.txt'
 			}
                 }
             }
