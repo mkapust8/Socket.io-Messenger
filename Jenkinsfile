@@ -69,7 +69,31 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                
+                
+                sh 'docker tag messenger mkapust9/jenkins_deploy'
+                sh 'docker push mkapust9/jenkins_deploy'
+                
+            }
+            post {
+            	
+            	failure{	
+            			
+            		echo 'Deploy failed....'
+			emailext attachLog: true,
+			body: "Deploy failed for job ${env.JOB_NAME}",
+			subject: "Deploy failed.",
+			to: 'marcin.kapusta2986@gmail.com'
+            		
+            	}
+            	success{
+            		echo 'Deploy successful....'
+			emailext attachLog: true,
+			body: "Deploy succeeded for job ${env.JOB_NAME}",
+			subject: "Deploy sucessful.",
+			to: 'marcin.kapusta2986@gmail.com'
+            	}
+            
             }
         }
     }
